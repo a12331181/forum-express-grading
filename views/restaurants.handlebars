@@ -40,17 +40,15 @@
       </a>
     </li>
     {{#each totalPage}}
-    {{#ifCond this ../page}}
-    <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
+      {{#ifCond this ../page}}
+        <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
     {{else}}
-    <li class="page-item"><a class="page-link"
-        href="/restaurants?page={{this}}&categoryId={{../categoryId}}">{{this}}</a></li>
-    {{/ifCond}}
+      <li class="page-item"><a class="page-link"
+          href="/restaurants?page={{this}}&categoryId={{../categoryId}}">{{this}}</a></li>
+      {{/ifCond}}
     {{/each}}
-    <li class="page-item"><a class="page-link" href="/restaurants?page={{next}}&categoryId={{categoryId}}"
-        aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
+      <li class="page-item"><a class="page-link" href="/restaurants?page={{next}}&categoryId={{categoryId}}" aria-label="Next">
+      <span aria-hidden="true">&raquo;</span>
+    </a></li>
   </ul>
 </nav>
