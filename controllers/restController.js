@@ -57,6 +57,7 @@ const restController = {
         { model: Comment, include: [User] }
       ]
     }).then(restaurant => {
+      restaurant.increment('viewCounts', { by: 1 });
       return res.render('restaurant', {
         restaurant: restaurant.toJSON(),
       })
@@ -89,10 +90,9 @@ const restController = {
     return Restaurant.findByPk(req.params.id,{
       include: [Category, Comment]
     }).then(restaurant => {
-      let commentCount = restaurant.Comments.length
       return res.render('dashboard', {
         restaurant: restaurant.toJSON(),
-        commentCount : commentCount
+        commentCount : restaurant.Comments.length
       })
     })
   }
