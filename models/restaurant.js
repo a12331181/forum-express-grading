@@ -5,14 +5,18 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Restaurant extends Model {
     static associate (models) {
-      // define association here
-      Restaurant.belongsTo(models.Category)  // 加入關聯設定
+      Restaurant.belongsTo(models.Category) 
       Restaurant.hasMany(models.Comment)
       Restaurant.belongsToMany(models.User, {
-      through: models.Favorite,
-      foreignKey: 'RestaurantId',
-      as: 'FavoritedUsers'
-    })
+        through: models.Favorite,
+        foreignKey: 'RestaurantId',
+        as: 'FavoritedUsers'
+      })
+      Restaurant.belongsToMany(models.User, {
+        through: models.Like,
+        foreignKey: 'RestaurantId',
+        as: 'LikeUsers'
+      })
     }
   };
   Restaurant.init({
