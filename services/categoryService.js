@@ -16,6 +16,40 @@ const categoryService = {
         callback({ categories: categories })
       }
     })
+  },
+  postCategory: (req, res, callback) => {
+    if (!req.body.name) {
+      callback({ status: 'error', message: "name didn't exist" })
+    } else {
+      return Category.create({
+        name: req.body.name
+      })
+        .then((category) => {
+          callback({ status: 'success', message: 'category was successfully created' })
+        })
+    }
+  },
+  putCategory: (req, res, callback) => {
+    if (!req.body.name) {
+      callback({ status: 'error', message: "name didn't exist" })
+    } else {
+      return Category.findByPk(req.params.id)
+        .then((category) => {
+          category.update(req.body)
+            .then((category) => {
+              callback({ status: 'success', message: 'category was successfully to update' })
+            })
+        })
+    }
+  },
+  deleteCategory: (req, res, callback) => {
+    return Category.findByPk(req.params.id)
+      .then((category) => {
+        category.destroy()
+          .then((category) => {
+            callback({ status: 'success', message: 'category was successfully to delete' })
+          })
+      })
   }
 }
 module.exports = categoryService
